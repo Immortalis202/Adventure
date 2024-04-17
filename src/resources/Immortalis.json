@@ -1,0 +1,17 @@
+{
+  "name": "Immortalis" ,
+  "dex": 10,
+  "wis": 10,
+  "str": 10,
+  "speed": 10,
+  "health": 10,
+  "armor" : {
+    "name" : "busto",
+    "armorType" : "LIGHT",
+    "description" : "qualcosa",
+    "material" : "LEATHER",
+    "hpModifier" : 2,
+    "speedModifier" : 2
+  },
+  "weapon" : null
+}
