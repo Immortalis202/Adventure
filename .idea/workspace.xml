@@ -4,48 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8adc5900-0219-4654-a1e6-2e494df89e72" name="Changes" comment="First Commit">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/fasterxml_jackson_core_databind.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/byte-buddy-1.14.9.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/gson-2.10.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jackson-annotations-2.13.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jackson-annotations-2.17.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jackson-core-2.13.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jackson-core-2.17.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jackson-databind-2.13.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jackson-databind-2.17.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Equip/Armor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Equip/ArmorType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Equip/Material.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Equip/Spell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Equip/Weapon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Equip/WeaponType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/General/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/General/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/General/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/General/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Monster/Dragon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Monster/Dwarf.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Monster/Elf.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Monster/Gnome.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Monster/Goblin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Monster/Monster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/Immortalis.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+    <list default="true" id="8adc5900-0219-4654-a1e6-2e494df89e72" name="Changes" comment="Almost done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaExam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaExam.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Armor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Monster.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equip/Potion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PotionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equip/PotionType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Spell.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Weapon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WeaponType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/General/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/General/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/General/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +144,7 @@
       <workItem from="1712948818387" duration="7355000" />
       <workItem from="1713020755109" duration="1787000" />
       <workItem from="1713022660806" duration="41660000" />
-      <workItem from="1713255689535" duration="52599000" />
+      <workItem from="1713255689535" duration="54981000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -199,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712560732905</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Almost done">
+      <option name="closed" value="true" />
+      <created>1713380835931</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713380835931</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +179,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="First Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First Commit" />
+    <MESSAGE value="Almost done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Almost done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

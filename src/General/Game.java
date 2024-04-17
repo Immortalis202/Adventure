@@ -3,6 +3,7 @@ package General;
 import Monster.Goblin;
 import Monster.Monster;
 
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Game {
@@ -87,7 +88,18 @@ public class Game {
 
 
 	public void encounter(Player p,Monster ...monsters ){
+		Scanner scanner = new Scanner(System.in);
 		player.action();
+		int damage;
+		switch(scanner.nextLine()){
+		case "1", "Light attack", "Light Attack", "light attack":
+			damage = player.attackLight();
+			System.out.printf("Light attack done: %d",damage);
+			break;
+		case "2", "Heavy attack", "Heavy Attack", "heavy attack":
+			damage = player.attackHeavy();
+			System.out.printf("Heavy attack done: %d",damage);
+		}
 	}
 }
 

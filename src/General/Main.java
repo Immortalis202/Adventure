@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
 	static Player selected;
 	static ArrayList<Player> characters = new ArrayList<>();
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Player person;
 		try {
@@ -98,13 +98,12 @@ public class Main {
 						 }
 						 if(p.getName().equals(nameChoice)) {
 							 selected = p;
-							 System.out.printf("You have selected %s", selected.getName());
+							 System.out.printf("You have selected %s \n", selected.getName());
 						 }
 					 }
-					 System.out.printf("Character not found\n");
-					 Game game = new Game();
-					 System.out.println("Game is starting...\n");
-					 game.start();
+					 Game game = new Game(selected);
+					 game.start(selected);
+
 			}
 	}
 	}

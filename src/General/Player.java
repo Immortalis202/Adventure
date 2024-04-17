@@ -100,12 +100,7 @@ public class Player implements Action<Monster, Potion> {
 				
 				""");
 
-		switch(scanner.nextLine()){
-		case "1", "Light attack", "Light Attack", "light attack":
-			damage = attackLight();
-			System.out.printf("Light attack done");
-			break;
-		}
+
 
 	}
 
@@ -122,20 +117,28 @@ public class Player implements Action<Monster, Potion> {
 
 	@Override
 	public int attackLight() {
-		return str / 10 + weapon.getStrModifier();
+		if(this.str > this.wis) {
+			return this.str / 10;
+		}else{
+			return this.wis / 10;
+		}
 	}
 
 	@Override
 	public int attackHeavy() {
 		skipTurn = true;
 
-		return 2 * str / 10 + weapon.getStrModifier();
+		if(this.str > this.dex) {
+			return this.str / 10;
+		}else{
+			return this.dex / 10;
+		}
 	}
 
 	@Override
 	public int attackSpecial() {
-		cdSpecial = CD_SPECIAL;
-		return str / 10 + wis / 10 + weapon.getStrModifier();
+		this.cdSpecial = CD_SPECIAL;
+		return this.str / 10 + this.dex / 10 + this.wis / 10;
 	}
 
 	@Override
@@ -143,20 +146,20 @@ public class Player implements Action<Monster, Potion> {
 		potionUsed = true;
 		switch(potion.getType()) {
 		case HP:
-			health = health + potion.getModifier();
+			this.health = this.health + potion.getModifier();
 			break;
 		case SPEED:
-			speed = speed + potion.getModifier();
+			this.speed = this.speed + potion.getModifier();
 			break;
 		case STRENGTH:
-			str = str + potion.getModifier();
+			this.str = this.str + potion.getModifier();
 			break;
 		case WISDOM:
-			wis = wis + potion.getModifier();
+			this.wis = this.wis + potion.getModifier();
 			break;
 
 		case DEXTERITY:
-			dex = dex + potion.getModifier();
+			this.dex = this.dex + potion.getModifier();
 			break;
 		case COOLDOWN:
 			for(Spell s : spells) {
@@ -168,13 +171,13 @@ public class Player implements Action<Monster, Potion> {
 	}
 
 	public int attackSpell(Spell spell) {
-		return wis / 10 + spell.getDamage();
+		return this.wis / 10 + spell.getDamage();
 	}
 
 	public boolean run(Monster monster) {
 		boolean result = false;
 
-		if(speed * dex > monster.speed * monster.dex) {
+		if(this.speed * this.dex > monster.getSpeed() * monster.getDex()) {
 			return rand.nextBoolean();
 		}else {
 			return rand.nextInt() > 2;
@@ -206,23 +209,23 @@ public class Player implements Action<Monster, Potion> {
 	}
 
 	void resetStats(){
-		defSpeed = speed;
-		defStr = str;
-		defWis = wis;
-		defDex = dex;
+		this.defSpeed = this.speed;
+		this.defStr = this.str;
+		this.defWis = this.wis;
+		this.defDex = this.dex;
 	}
 
 	@Override
 	public String toString() {
 
-		return name  + "\n" +
-				"\thealth\t" + health +
-				"\n\tspeed\t" + speed +
-				"\n\tstr\t\t" + str +
-				"\n\twis\t\t" + wis +
-				"\n\tdex\t\t" + dex +
-				"\n\tarmor\t" + (armor != null ? armor.toString() : "Not Present") +
-				"\n\tweapon\t" + (weapon != null ? weapon.toString() : "Not Present") +
+		return this.name  + "\n" +
+				"\thealth\t" + this.health +
+				"\n\tspeed\t" + this.speed +
+				"\n\tstr\t\t" + this.str +
+				"\n\twis\t\t" + this.wis +
+				"\n\tdex\t\t" + this.dex +
+				"\n\tarmor\t" + (this.armor != null ? this.armor.toString() : "Not Present") +
+				"\n\tweapon\t" + (this.weapon != null ? this.weapon.toString() : "Not Present") +
 				//TODO class Spells implement to String
 				"\n\tspells\t" + Arrays.toString(spells) +"\n";
 	}
