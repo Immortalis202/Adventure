@@ -99,6 +99,11 @@ public class Game {
 		case "2", "Heavy attack", "Heavy Attack", "heavy attack":
 			damage = player.attackHeavy();
 			System.out.printf("Heavy attack done: %d",damage);
+   break;
+  case "3", "Special Attack", "Special attack", "special attack":
+   damage = player.attackSpecial();
+   System.out.printf("Special attack done for: %d ",damage);
+   break;
 		}
 	}
 }
