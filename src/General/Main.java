@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 public class Main {
 	static Player selected;
 	static ArrayList<Player> characters = new ArrayList<>();
@@ -28,6 +30,7 @@ public class Main {
 			System.out.println("[2] Add a new character");
 			System.out.println("[3] Remove a character");
 			System.out.println("[4] Start the game");
+			System.out.println("[5] Exit");
 
 			Scanner scanner = new Scanner(System.in);
 			int choice = scanner.nextInt();
@@ -47,10 +50,12 @@ public class Main {
 					if(p.getName().equals(nameChoice)) {
 						selected = p;
 						System.out.printf("You have selected %s", selected.getName());
+					}else {
+						System.out.printf("Character not found\n");
 					}
 				}
-				System.out.printf("Character not found\n");
-				//startGame();
+				Game game = new Game(selected);
+				game.start(selected);
 
 				break;
 			case 2:
@@ -70,6 +75,7 @@ public class Main {
 					person = Utils.charBuilder();
 					characters.add(person);
 				}
+				break;
 			case 3:
 				 System.out.println("Insert the name of the character you would like to remove");
 				 scanner.nextLine();
@@ -88,23 +94,29 @@ public class Main {
 					 }
 				 }
 				 break;
-				 case 4:
-					 System.out.println("\nWho do you wanna play with?");
-					 scanner.nextLine();
-					 nameChoice = scanner.nextLine();
-					 for(Player p : characters) {
-						 if(p == null){
-							 break;
-						 }
-						 if(p.getName().equals(nameChoice)) {
-							 selected = p;
-							 System.out.printf("You have selected %s \n", selected.getName());
-						 }
+			case 4:
+				 System.out.println("\nWho do you wanna play with?");
+				 scanner.nextLine();
+				 nameChoice = scanner.nextLine();
+				 for(Player p : characters) {
+					 if(p == null){
+						 break;
 					 }
-					 Game game = new Game(selected);
-					 game.start(selected);
+					 if(p.getName().equals(nameChoice)) {
+						 selected = p;
+						 System.out.printf("You have selected %s \n", selected.getName());
+					 }
+				 }
+				 Game game2 = new Game(selected);
+				 game2.start(selected);
+			case 5:
+				System.exit(1);
 
+			default:
+				System.out.println("Invalid choice");
+				break;
 			}
+
 	}
 	}
 }

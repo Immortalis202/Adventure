@@ -11,7 +11,8 @@ public class Weapon  {
 	String description;
 	WeaponType weaponType;
 
-	public Weapon(String name, int strModifier, int spModifier, int dexModifier, int wisModifier, Material material, String description, WeaponType weaponType) {
+	public Weapon(String name, int strModifier, int spModifier, int dexModifier, int wisModifier,
+				  Material material, String description, WeaponType weaponType) {
 		this.name = name;
 		this.strModifier = strModifier;
 		this.spModifier = spModifier;

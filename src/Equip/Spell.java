@@ -48,4 +48,14 @@ public class Spell {
 	public int getCooldown() {
 		return cooldown;
 	}
+	//TODO fix
+	@Override
+	public String toString() {
+		return "Spell{" +
+				"name='" + name + '\'' +
+				", damage=" + damage +
+				", description='" + description + '\'' +
+				", cooldown=" + cooldown +
+				'}';
+	}
 }

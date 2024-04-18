@@ -14,8 +14,8 @@ public class Dragon extends Monster {
 		setWis(7);
 		setSpeed(10);
 
-
-		setDescription("The biggest dragon you have ever seen, the trees around you seems to be toothpick compared to him. On his head two large horns stands out, which are pointed backward their wings. A thick smell of sulfur and smoke come from him.\nThe heat rising from his body makes his silhouette blurred ");
+		//TODO finish dragon description
+		setDescription("The biggest dragon you have ever seen, the trees around hims looks like toothpick compared to him. On his head two large horns stands out, which are pointed backward their wings. A thick smell of sulfur and smoke come from him.\nThe heat rising from his body makes his silhouette blurred ");
 		setModifier();
 	}
 

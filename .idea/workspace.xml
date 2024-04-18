@@ -6,9 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="8adc5900-0219-4654-a1e6-2e494df89e72" name="Changes" comment="Almost done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equip/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equip/Armor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equip/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equip/Spell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equip/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equip/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/General/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Action.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/General/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/General/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/General/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/General/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/General/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Monster/Dragon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Monster/Dragon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Monster/Monster.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +35,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Immortalis202"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Immortalis202/Adventure.git",
+    "accountId": "f6b2c945-cf2b-41d3-8a4d-97732678d761"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -144,7 +163,7 @@
       <workItem from="1712948818387" duration="7355000" />
       <workItem from="1713020755109" duration="1787000" />
       <workItem from="1713022660806" duration="41660000" />
-      <workItem from="1713255689535" duration="54981000" />
+      <workItem from="1713255689535" duration="69833000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -170,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713380835931</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Almost done">
+      <option name="closed" value="true" />
+      <created>1713389890323</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713389890323</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +220,11 @@
           <url>file://$PROJECT_DIR$/src/General/Utils.java</url>
           <line>37</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/General/Utils.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

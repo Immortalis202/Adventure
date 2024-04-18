@@ -10,8 +10,11 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+AHAHAH la javadoc
 
-//TODO modificare l'accesso alle variabili con i getter
+ */
+//TODO togliere pozioni o implementarle
 public class Player implements Action<Monster, Potion> {
 	Scanner scanner = new Scanner(System.in);
 
@@ -33,7 +36,7 @@ public class Player implements Action<Monster, Potion> {
 	Weapon weapon;
 	Spell[] spells = new Spell[MAX_SPELL];
 
-	int cdSpecial;
+	int cdSpecial = 0;
 
 	boolean skipTurn = false;
 	boolean potionUsed = false;
@@ -82,7 +85,6 @@ public class Player implements Action<Monster, Potion> {
 
 	public void action(){
 		int damage;
-		Scanner scanner = new Scanner(System.in);
 		System.out.print("""
 				What action do you want to do?
 				
@@ -94,25 +96,9 @@ public class Player implements Action<Monster, Potion> {
 				
 				[4] Throw a spell
 				
-				[5] Dodge
-				
 				[6] Run away
 				
 				""");
-
-
-
-	}
-
-	@Override
-	public boolean dodge(Monster monster) {
-		boolean result = false;
-		if(speed * wis >= monster.speed * monster.wis) {
-			return rand.nextBoolean();
-		}else {
-			return rand.nextInt() > 2;
-		}
-
 	}
 
 	@Override
@@ -208,6 +194,9 @@ public class Player implements Action<Monster, Potion> {
 		spells[i] = spell;
 	}
 
+
+
+
 	void resetStats(){
 		this.defSpeed = this.speed;
 		this.defStr = this.str;
@@ -276,6 +265,26 @@ public class Player implements Action<Monster, Potion> {
 
 	public void setDex(int dex) {
 		this.dex = dex;
+	}
+
+	public int getCdSpecial() {
+		return cdSpecial;
+	}
+
+	public void setCdSpecial(int cdSpecial) {
+		this.cdSpecial = cdSpecial;
+	}
+
+	public boolean isSkipTurn() {
+		return skipTurn;
+	}
+
+	public void setSkipTurn(boolean skipTurn) {
+		this.skipTurn = skipTurn;
+	}
+
+	public Weapon getWeapon() {
+		return weapon;
 	}
 }
 

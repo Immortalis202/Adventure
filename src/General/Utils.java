@@ -132,6 +132,7 @@ public class Utils {
 		while(i != 1){
 			Spell spell;
 			if(sc.nextLine().equalsIgnoreCase("y")) {
+				System.out.printf("Add spell number %d\n",4-i);
 				spell = spellBuilder();
 			}else {
 				spell = null;
@@ -446,5 +447,4 @@ public class Utils {
 		return new Weapon(name, tempStrModifier, tempSpeedModifier, tempDexModifier, tempWisModifier, Material.valueOf(weaponMat), description, WeaponType.valueOf(type.toUpperCase()));
 
 	}
-
 }

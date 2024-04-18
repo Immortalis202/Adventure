@@ -42,10 +42,6 @@ public abstract class Monster implements Action<Player, Potion> {
 
 	}
 
-	@Override
-	public  boolean dodge(Player object) {
-		return false;
-	}
 
 	@Override
 	public int attackLight() {

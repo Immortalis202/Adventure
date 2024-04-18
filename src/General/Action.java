@@ -11,7 +11,6 @@ public interface Action<M,P>{
 	//TODO generici oppure passa un object
 
 	/*General.Action doable by player and monster*/
-	boolean dodge(M object);
 
 	int attackLight();
 	/*similar to Light but more damage and turn cooldown*/
