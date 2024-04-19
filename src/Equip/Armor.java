@@ -1,16 +1,22 @@
 package Equip;
 
 import java.util.Scanner;
+/**
+ * Class to define armor
+ * Uses {@link Material} and {@link ArmorType}
+ */
+
+
 
 public class Armor {
 	Scanner armorScan = new Scanner(System.in);
 
-	ArmorType armorType;
-	String name;
-	String description;
-	Material material;
-	int hpModifier;
-	int speedModifier;
+	private ArmorType armorType;
+	private String name;
+	private String description;
+	private Material material;
+	private int hpModifier;
+	private int speedModifier;
 
 
 	public Armor(ArmorType armorType, String name, String description, Material material) {
@@ -33,6 +39,16 @@ public class Armor {
 
 	public Armor(){
 
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 	public void setArmorType(ArmorType armorType) {
@@ -61,14 +77,13 @@ public class Armor {
 
 	@Override
 	public String toString() {
-		return "Equip.Armor{" +
+		return "Armor:" +
 				"armorType=" + armorType +
 				", name='" + name + '\'' +
 				", description='" + description + '\'' +
 				", material=" + material +
 				", hpModifier=" + hpModifier +
-				", speedModifier=" + speedModifier +
-				'}';
+				", speedModifier=" + speedModifier ;
 	}
 
 	public ArmorType getArmorType() {

@@ -1,6 +1,5 @@
 package Monster;
 
-import Monster.Monster;
 import Equip.Weapon;
 
 

@@ -1,5 +1,10 @@
 package Equip;
 
+/**
+ * define the material for {@link Armor} and {@link Weapon}
+ */
+
+
 public enum Material {
 	LEATHER,
 	WOOD,

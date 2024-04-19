@@ -1,15 +1,20 @@
 package Equip;
 
+/**
+ * Class to define weapon type<br>
+ * Uses {@link Material} and {@link WeaponType}
+* */
+
 public class Weapon  {
 
-	String name;
-	int strModifier;
-	int spModifier;
-	int dexModifier;
-	int wisModifier;
-	Material material;
-	String description;
-	WeaponType weaponType;
+	private String name;
+	private int strModifier;
+	private int  spModifier;
+	private int dexModifier;
+	private int wisModifier;
+	private Material material;
+	private String description;
+	private WeaponType weaponType;
 
 	public Weapon(String name, int strModifier, int spModifier, int dexModifier, int wisModifier,
 				  Material material, String description, WeaponType weaponType) {
@@ -87,5 +92,18 @@ public class Weapon  {
 
 	public WeaponType getWeaponType() {
 		return weaponType;
+	}
+
+	@Override
+	public String toString() {
+		return "Weapon:" +
+				"weaponType=" + weaponType +
+				", description='" + description + '\'' +
+				", material=" + material +
+				", wisModifier=" + wisModifier +
+				", dexModifier=" + dexModifier +
+				", spModifier=" + spModifier +
+				", strModifier=" + strModifier +
+				", name='" + name + '\'';
 	}
 }

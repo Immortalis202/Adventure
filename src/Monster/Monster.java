@@ -1,18 +1,23 @@
 package Monster;
 
-import Equip.Potion;
-import Equip.PotionType;
 import Equip.Weapon;
 import General.Action;
 import General.Player;
 
-public abstract class Monster implements Action<Player, Potion> {
-	public int health;
-	public int wis;
-	public int speed;
-	public int dex;
-	public int str;
-	String description;
+/**
+ * This abstract class serve as blueprint for creating different type of monster. <br>
+ * Defines the method setModifier for automatically calculate the weapon and armor modifiers <br>
+ * Implements Action interface and need the playing character to be passed <br>
+ * @see General.Action
+ * */
+
+public abstract class Monster implements Action{
+	private int health;
+	private int wis;
+	private int speed;
+	private int dex;
+	private int str;
+	private String description;
 
 	boolean skipTurn = false;
 	boolean potionUsed = false;
@@ -32,6 +37,24 @@ public abstract class Monster implements Action<Player, Potion> {
 	public Monster() {
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+	/**
+	 * Void function to automatically set the weapon modifier
+	 * @see Player#setModifier()
+	 * */
 	public void setModifier(){
 		if(weapon != null){
 			str = str + weapon.getStrModifier();
@@ -42,7 +65,11 @@ public abstract class Monster implements Action<Player, Potion> {
 
 	}
 
-
+	/**
+	* Method implemented from {@link Action} for doing the light attack
+	 * @return damage
+	 *
+	* */
 	@Override
 	public int attackLight() {
 		if(this.str > this.dex) {
@@ -50,6 +77,12 @@ public abstract class Monster implements Action<Player, Potion> {
 		}
 		return dex + weapon.getDexModifier();
 	}
+
+	/**
+	 * Method implemented from {@link Action} for doing the heavy attack
+	 * @return damage
+	 *
+	 * */
 	@Override
 	public int attackHeavy() {
 		skipTurn = true;
@@ -60,35 +93,18 @@ public abstract class Monster implements Action<Player, Potion> {
 		return 2 * dex + weapon.getDexModifier();
 	}
 
+	/**
+	 * Method implemented from {@link Action} for doing the special attack
+	 * @return damage
+	 *
+	 * */
 	@Override
 	public int attackSpecial() {
 		cdSpecial = Action.CD_SPECIAL;
 		return str + wis + dex;
 	}
 
-	@Override
-	public void drinkPotion(Potion potion) {
-		potionUsed = true;
-		switch(potion.getType()) {
-		case PotionType.HP:
-			health = health + potion.getModifier();
-			break;
-		case PotionType.SPEED:
-			speed = speed + potion.getModifier();
-			break;
-		case PotionType.STRENGTH:
-			str = str + potion.getModifier();
-			break;
-		case PotionType.WISDOM:
-			wis = wis + potion.getModifier();
-			break;
 
-		case PotionType.DEXTERITY:
-			dex = dex + potion.getModifier();
-			break;
-
-		}
-	}
 
 	public int getHealth() {
 		return health;

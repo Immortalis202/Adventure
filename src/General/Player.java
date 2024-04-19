@@ -1,7 +1,6 @@
 package General;
 
 import Equip.Armor;
-import Equip.Potion;
 import Equip.Spell;
 import Equip.Weapon;
 import Monster.Monster;
@@ -11,24 +10,25 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
-AHAHAH la javadoc
-
+* Define the structure of class <code>Player</code> that implements {@link Action} <br>
+ * Inherit the {@link Action#attackLight()},{@link Action#attackHeavy()},{@link Action#attackSpecial()}
+ *
  */
-//TODO togliere pozioni o implementarle
-public class Player implements Action<Monster, Potion> {
+
+public class Player implements Action{
 	Scanner scanner = new Scanner(System.in);
 
-	public String name;
-	public int health;
-	public int speed;
-	public int str;
-	public int wis;
-	public int dex;
+	private String name;
+	private int health;
+	private int speed;
+	private int str;
+	private int wis;
+	private int dex;
 
-	public int defSpeed = speed;
-	public int defStr = str;
-	public int defWis = wis;
-	public int defDex = dex;
+	private int defSpeed = speed;
+	private int defStr = str;
+	private int defWis = wis;
+	private int defDex = dex;
 
 
 	Random rand = new Random();
@@ -55,6 +55,10 @@ public class Player implements Action<Monster, Potion> {
 		this.armor = armor;
 		this.weapon = weapon;
 		setModifier();
+		this.defSpeed = speed;
+		this.defStr = str;
+		this.defWis = wis;
+		this.defDex = dex;
 
 	}
 
@@ -68,10 +72,13 @@ public class Player implements Action<Monster, Potion> {
 	public void setWeapon(Weapon weapon){
 		this.weapon = weapon;
 	}
-
+	/**
+	 * Void function to automatically set the weapon modifier
+	 * @see Monster#setModifier()
+	 * */
 	public void setModifier(){
 		if(weapon != null){
-			str = str + weapon.getStrModifier();
+			str = this.str + weapon.getStrModifier();
 			speed = speed + weapon.getSpModifier();
 			wis = wis + weapon.getWisModifier();
 			dex = dex + weapon.getDexModifier();
@@ -82,8 +89,11 @@ public class Player implements Action<Monster, Potion> {
 				speed = speed + armor.getSpeedModifier();
 		}
 	}
+	/**
+	 * Method for choosing the player action
+	 * */
 
-	public void action(){
+	public static void action(){
 		int damage;
 		System.out.print("""
 				What action do you want to do?
@@ -96,70 +106,62 @@ public class Player implements Action<Monster, Potion> {
 				
 				[4] Throw a spell
 				
-				[6] Run away
-				
+				[5] Run away
 				""");
 	}
-
+	/**
+	 * Method implemented from {@link Action} for doing the light attack
+	 * @return damage
+	 *
+	 * */
 	@Override
 	public int attackLight() {
 		if(this.str > this.wis) {
-			return this.str / 10;
+			return this.str;
 		}else{
-			return this.wis / 10;
+			return this.wis;
 		}
 	}
-
+	/**
+	 * Method implemented from {@link Action} for doing the heavy attack
+	 * @return damage
+	 *
+	 * */
 	@Override
 	public int attackHeavy() {
 		skipTurn = true;
 
 		if(this.str > this.dex) {
-			return this.str / 10;
+			return this.str;
 		}else{
-			return this.dex / 10;
+			return this.dex;
 		}
 	}
-
+	/**
+	 * Method implemented from {@link Action} for doing the special attack
+	 * @return damage
+	 *
+	 * */
 	@Override
 	public int attackSpecial() {
 		this.cdSpecial = CD_SPECIAL;
-		return this.str / 10 + this.dex / 10 + this.wis / 10;
+		return this.str  + this.dex + this.wis;
 	}
 
-	@Override
-	public void drinkPotion(Potion potion) {
-		potionUsed = true;
-		switch(potion.getType()) {
-		case HP:
-			this.health = this.health + potion.getModifier();
-			break;
-		case SPEED:
-			this.speed = this.speed + potion.getModifier();
-			break;
-		case STRENGTH:
-			this.str = this.str + potion.getModifier();
-			break;
-		case WISDOM:
-			this.wis = this.wis + potion.getModifier();
-			break;
-
-		case DEXTERITY:
-			this.dex = this.dex + potion.getModifier();
-			break;
-		case COOLDOWN:
-			for(Spell s : spells) {
-				s.setCooldown(0);
-			}
-			break;
-
-		}
-	}
-
+	/**
+	 * Method for doing the spell attack if exists
+	 * @return damage
+	 *
+	 * */
 	public int attackSpell(Spell spell) {
-		return this.wis / 10 + spell.getDamage();
+		return this.wis + spell.getDamage();
 	}
 
+	/**
+	 * Method for escaping enemies
+	 * @return result
+	 *
+	 * */
 	public boolean run(Monster monster) {
 		boolean result = false;
 
@@ -170,6 +172,10 @@ public class Player implements Action<Monster, Potion> {
 		}
 	}
 
+	/**
+	* Method to add up to four {@link Spell} to the character
+	 * @param spell
+	* */
 	void addSpells(Spell spell){
 		boolean full = true;
 		for(Spell value : spells) {
@@ -179,14 +185,7 @@ public class Player implements Action<Monster, Potion> {
 			}
 		}
 		String response;
-		if(full){
-			System.out.print("All four spells slot are occupied, do you want to swap one of them? [Y/N]");
-			response = scanner.nextLine();
-			//if(response.equalsIgnoreCase("y") || response.equalsIgnoreCase("yes"))
-			if(new Scanner(response).nextLine().equalsIgnoreCase("y") || new Scanner(response).nextLine().equalsIgnoreCase("yes")){
-				//call to swapSpell method
-			}
-		}
+
 		int i = 0;
 		while(spells[i] != null){
 			i++;
@@ -195,13 +194,14 @@ public class Player implements Action<Monster, Potion> {
 	}
 
 
-
-
+	/**
+	 * Method to reset the stats after every encounter
+	 */
 	void resetStats(){
-		this.defSpeed = this.speed;
-		this.defStr = this.str;
-		this.defWis = this.wis;
-		this.defDex = this.dex;
+		this.speed =this.defSpeed;
+		this.str = this.defStr;
+		this.wis = this.defWis;
+		this.dex = this.defDex;
 	}
 
 	@Override
@@ -285,6 +285,14 @@ public class Player implements Action<Monster, Potion> {
 
 	public Weapon getWeapon() {
 		return weapon;
+	}
+
+	public Spell[] getSpells() {
+		return spells;
+	}
+
+	public void setSpells(Spell[] spells) {
+		this.spells = spells;
 	}
 }
 

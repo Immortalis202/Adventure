@@ -1,23 +1,28 @@
 package General;
 
-/**
- *
- */
+import Monster.Monster;
 
-public interface Action<M,P>{
+public interface Action{
 	/*Constant for monster and player*/
 	int CD_SPECIAL = 3;
 	int MAX_SPELL = 4;
-	//TODO generici oppure passa un object
-
-	/*General.Action doable by player and monster*/
-
+	/**
+	 * One of the method used during the {@link General.Game#encounter(Player, Monster...)} for doing a basic attack
+	 * @return damage
+	* */
 	int attackLight();
-	/*similar to Light but more damage and turn cooldown*/
+
+
+	/**
+	 * One of the method used during the {@link General.Game#encounter(Player, Monster...)} for doing a powerful attack
+	 * @return damage
+	 * */
 	int attackHeavy();
+
+
+	/**
+	 * One of the method used during the {@link General.Game#encounter(Player, Monster...)} for doing the most powerful attack
+	 * @return damage
+	 * */
 	int attackSpecial();
-	void drinkPotion(P object);
-
-
-
 }

@@ -1,5 +1,9 @@
 package Equip;
 
+/**
+ * Define the type of {@link Weapon}
+ */
+
 public enum WeaponType {
 	SWORD,
 	AXE,

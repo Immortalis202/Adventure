@@ -1,17 +1,26 @@
 {
   "name": "Immortalis" ,
-  "dex": 10,
-  "wis": 10,
+  "dex": 7,
+  "wis": 2,
   "str": 10,
   "speed": 10,
-  "health": 10,
+  "health": 30,
   "armor" : {
-    "name" : "busto",
+    "name" : "BreastPlate",
     "armorType" : "LIGHT",
-    "description" : "qualcosa",
+    "description" : "A simple armor",
     "material" : "LEATHER",
     "hpModifier" : 2,
     "speedModifier" : 2
   },
-  "weapon" : null
+  "weapon" : {
+    "name" : "Wooden sword",
+    "strModifier" : 3,
+    "spModifier" : 1,
+    "dexModifier" : 0,
+    "wisModifier" : 0,
+    "material" : "WOOD",
+    "description" : "a simple wooden sword",
+    "weaponType": "SWORD"
+  }
 }

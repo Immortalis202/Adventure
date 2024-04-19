@@ -1,5 +1,9 @@
 package Equip;
 
+/**
+ * Class to define spell structure
+* */
+
 public class Spell {
 	String name;
 	int damage;
@@ -13,6 +17,9 @@ public class Spell {
 		this.damage = damage;
 		this.description = description;
 		this.cooldown = cooldown;
+	}
+
+	public Spell() {
 	}
 
 
@@ -48,14 +55,13 @@ public class Spell {
 	public int getCooldown() {
 		return cooldown;
 	}
-	//TODO fix
+
 	@Override
 	public String toString() {
-		return "Spell{" +
+		return "Spell:" +
 				"name='" + name + '\'' +
 				", damage=" + damage +
 				", description='" + description + '\'' +
-				", cooldown=" + cooldown +
-				'}';
+				", cooldown=" + cooldown;
 	}
 }

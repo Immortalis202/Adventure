@@ -1,36 +1,57 @@
-package General;
+package Game;
 
+import General.Game;
+import General.Player;
+import General.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
-import static java.lang.System.exit;
+
 
 public class Main {
 	static Player selected;
-	static ArrayList<Player> characters = new ArrayList<>();
+	public static ArrayList<Player> characters = new ArrayList<>();
 	public static void main(String[] args) throws IOException, InterruptedException {
 		ObjectMapper objectMapper = new ObjectMapper();
+		ArrayList<String> fileName = new ArrayList<>();
 		Player person;
-		try {
-			person = objectMapper.readValue(new File("C:\\UFS04\\JavaExam\\src\\resources\\Immortalis.json"), Player.class);
-		} catch(IOException e) {
-			throw new RuntimeException(e);
+		try (Stream<Path> paths = Files.walk(Paths.get("src\\resources"))) {
+			paths
+					.filter(Files::isRegularFile)
+					.forEach(s -> fileName.add(String.valueOf(s)));
 		}
-		characters.add(person);
 
-		System.out.print("Welcome to the game\n");
-		System.out.print("---------------------------------------------------------------------------------------------------------------\n");
+		for(String s : fileName){
+			try {
+				File file = new File(s);
+				person = objectMapper.readValue(file, Player.class);
+			} catch(IOException e) {
+				throw new RuntimeException(e);
+			}
+			characters.add(person);
+		}
+
+
+
+		System.out.print("Welcome to SECRETS OF THE FOREST\n");
 		while(true){
+			System.out.print("---------------------------------------------------------------------------------------------------------------\n");
 			System.out.print("What do you want to do?\n");
 			System.out.println("[1] Choose the character to start");
 			System.out.println("[2] Add a new character");
 			System.out.println("[3] Remove a character");
 			System.out.println("[4] Start the game");
 			System.out.println("[5] Exit");
+			System.out.print("---------------------------------------------------------------------------------------------------------------\n");
+
 
 			Scanner scanner = new Scanner(System.in);
 			int choice = scanner.nextInt();
@@ -43,16 +64,21 @@ public class Main {
 				System.out.println("\nWho do you wanna play with?");
 				scanner.nextLine();
 				nameChoice = scanner.nextLine();
+				boolean found = false;
 				for(Player p : characters) {
 					if(p == null){
 						break;
 					}
 					if(p.getName().equals(nameChoice)) {
 						selected = p;
-						System.out.printf("You have selected %s", selected.getName());
-					}else {
-						System.out.printf("Character not found\n");
+						System.out.printf("You have selected %s\n", selected.getName());
+						found = true;
+
 					}
+				}
+				if(!found){
+					System.out.println("Character not found");
+					break;
 				}
 				Game game = new Game(selected);
 				game.start(selected);
@@ -95,7 +121,7 @@ public class Main {
 				 }
 				 break;
 			case 4:
-				 System.out.println("\nWho do you wanna play with?");
+				 System.out.println("Who do you wanna play with?");
 				 scanner.nextLine();
 				 nameChoice = scanner.nextLine();
 				 for(Player p : characters) {
@@ -120,3 +146,6 @@ public class Main {
 	}
 	}
 }
+
+//TODO javadoc
+//TODO README

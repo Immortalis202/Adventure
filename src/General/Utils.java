@@ -1,38 +1,27 @@
-package General;//LOAD OBJECT CLASS FROM JSON
-
-//private static void extracted() {
-//	ObjectMapper objectMapper = new ObjectMapper();
-//	try {
-//		// Read JSON from file and map it to General.Main object
-//		General.Player person = objectMapper.readValue(new File("C:\\UFS04\\JavaExam\\src\\Immortalis.json"), General.Player.class);
-//
-//		// Now you can use the person object
-//		System.out.println("Name: " + person.getName());
-//		System.out.println("Health: " + person.getHealth());
-//		System.out.println("Wisdom: " + person.getWis());
-//
-//
-//
-//	} catch (IOException e) {
-//		e.printStackTrace();
-//	}
-//}
-
+package General;
 import Equip.*;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import Game.Main;
 
+/**
+ * Generic class with utility method for {@link Player} creation and plot device
+ * */
 public class Utils {
-
-	static void printAll(){
+	public static void printAll(){
 		for(Player p : Main.characters){
 			System.out.printf(String.valueOf(p));
 		}
 	}
-//All exception catched
-	static Player charBuilder(){
+
+	/**
+	 * Method to create a new character<br>
+	 * Automatically calls {@link Utils#armorBuilder()}, {@link Utils#weaponBuilder()} and {@link Utils#spellBuilder()}
+	 * @return {@link Player}
+	* */
+	public static Player charBuilder(){
 		Scanner sc = new Scanner(System.in);
 		boolean exit= true;
 		String name = null;
@@ -123,29 +112,33 @@ public class Utils {
 			weapon = null;
 		}
 
-
 		Player p = new Player(name,health,speed,strength,wisdom,dex,armor, weapon);
-
 
 		System.out.println("Does it have spells? [Y/n]");
 		int i =4;
-		while(i != 1){
-			Spell spell;
-			if(sc.nextLine().equalsIgnoreCase("y")) {
-				System.out.printf("Add spell number %d\n",4-i);
+		Spell spell;
+		if(sc.nextLine().equalsIgnoreCase("y")) {
+			while(i != 1) {
+
+				System.out.printf("Add spell number %d\n", 5 - i);
 				spell = spellBuilder();
-			}else {
-				spell = null;
+
+				System.out.printf("Added spell: %s\n", spell);
+				p.addSpells(spell);
+				i--;
 			}
-			System.out.printf("Added spell: %s\n", spell);
-			p.addSpells(spell);
-			i--;
-		}
 
+		}else {
+			System.out.printf("Spells not added\n");
+			spell = null;
 
+	}
 		return p;
 	}
-
+	/**
+	 * Method to create a new {@link Spell}
+	 * @return {@link Spell}
+	 * */
 	static Spell spellBuilder(){
 		Scanner sc = new Scanner(System.in);
 		boolean exit = true;
@@ -188,6 +181,7 @@ public class Utils {
 		while(exit){
 			try {
 				System.out.println("Insert the description of the spell");
+				sc.nextLine();
 				description = sc.nextLine();
 				exit = false;
 			} catch(Exception e) {
@@ -198,13 +192,16 @@ public class Utils {
 		Spell spell = new Spell(name, damage,description,cooldown);
 		return spell;
 	}
-
+	/**
+	 * Method to create a new {@link Armor} from {@link Equip.Material} and {@link Equip.ArmorType}
+	 * @return {@link Armor}
+	 * */
 	static Armor armorBuilder(){
 		Scanner sc = new Scanner(System.in);
 		ArmorType armorType1 = null;
 		int tempHpModifier = 0;
 		int tempSpeedModifier = 0;
-		System.out.printf("You choose to add a new Equip.Armor \n");
+		System.out.printf("You choose to add a new armor \n");
 		System.out.print("""
 				===============================================================================================
 				What type of armor would you like to add?\
@@ -217,7 +214,7 @@ public class Utils {
 
 				[3] Light \t +1 \t  +1
 				================================================================================================
-				
+				Insert the word
 				""");
 		boolean exit = true;
 		while(exit){
@@ -249,7 +246,6 @@ public class Utils {
 		switch(armorType1){
 		case HEAVY:
 			System.out.print("""
-			
 					============================================================================================
 					    Material \tHP   SPEED\
 					
@@ -257,10 +253,8 @@ public class Utils {
 					
 					[2] Mithral     +4\t  -1\
 					
-					[3] Steel       +3\t   0\
-     
+					[3] Steel       +3\t   0
 					============================================================================================
-					
 					""");
 			break;
 
@@ -274,15 +268,12 @@ public class Utils {
 			
 				[2] Iron	   +3 \t   0\
 			
-				[3] Silver	   +2\t  +1\
-			
+				[3] Silver	   +2\t  +1
 				================================================================================================
-			
 			""");
 			break;
 		case LIGHT:
 			System.out.print("""
-		
 				================================================================================================
 				    Material   HP    SPEED\
 			
@@ -290,10 +281,8 @@ public class Utils {
 			
 				[2] Wood       +2\t  -1\
 			
-				[3] Chainmail  +3\t   0\
-			
+				[3] Chainmail  +3\t   0
 				===============================================================================================
-			
 			""");
 			break;
 		}
@@ -305,12 +294,12 @@ public class Utils {
 				material2 = Material.valueOf(material.toUpperCase());
 				exit = false;
 			} catch(IllegalArgumentException e) {
-				throw new RuntimeException(e);
+				System.out.printf("Wrong input\n");
 			}
 		}
-		System.out.printf("\nChoose the name of your armor\n");
+		System.out.printf("Choose the name of your armor\n");
 		String name = sc.nextLine();
-		System.out.printf("\nType the description of your armor (Do not press enter to go next line)\n");
+		System.out.printf("Type the description of your armor (Do not press enter to go next line)\n");
 		String description = sc.nextLine();
 
 
@@ -318,6 +307,10 @@ public class Utils {
 
 	}
 
+	/**
+	 * Method to create a new {@link Equip.Weapon} from {@link Equip.Material} and {@link Equip.WeaponType}
+	 * @return {@link Weapon}
+	 * */
 	static Weapon weaponBuilder() {
 		Scanner sc = new Scanner(System.in);
 
@@ -329,7 +322,7 @@ public class Utils {
 		String type = "";
 		// Switch type
 		while(exit) {
-			System.out.printf("You choose to add a new Equip.Weapon \n");
+			System.out.printf("You choose to add a new weapon \n");
 			System.out.printf("""
 					==================================================================================
 					What type of weapon would you like to add?\
@@ -346,8 +339,7 @@ public class Utils {
 									
 					[6] Crossbow\t\t\t [13] Dagger\
 									
-					[7] Two handed sword\t [14] Flail\
-					
+					[7] Two handed sword\t [14] Flail
 					================================================================================
 					Insert the name
 					""");
@@ -370,34 +362,33 @@ public class Utils {
 			System.out.printf("Choose the material\n");
 
 			System.out.printf("""
-						====================================================================================\
-							Material \tStrength   Speed\t Dexterity\t Wisdom
-						
-						[1] WOOD\t +1\t +1\t +2\t +1\
-						
-						[2] LEATHER\t \t +1\t +1\t +1\t +2\
-						
-						[3] BRONZE\t +2\t  -1\t +3\t +1\
-						
-						[4] SILVER\t +2\t +2\t +2\t +2\
-						
-						[5] IRON \t +3\t -1\t +2\t +2
-						
-						[6] STEEL       +4\t   -1\t +3\t +2\
-						
-						=====================================================================================\
-						
-						""");
+====================================================================================
+	Material \tStrength   Speed\t Dexterity\t Wisdom
+
+[1] WOOD\t\t +1\t\t\t+1\t\t\t+2\t\t\t+1\
+
+[2] LEATHER\t\t +1\t\t\t+1\t\t\t+1\t\t\t+2\
+
+[3] BRONZE\t\t +2\t\t\t-1\t\t\t+3\t\t\t+1\
+
+[4] SILVER\t\t +2\t\t\t+2\t\t\t+2\t\t\t+2\
+
+[5] IRON\t\t +3\t\t\t-1\t\t\t+2\t\t\t+2\
+
+[6] STEEL\t\t +4\t\t\t-1\t\t\t+3\t\t\t+2
+=====================================================================================
+      						""");
+
 
 			weaponMat = sc.nextLine();
 			try {
 				Material.valueOf(weaponMat.toUpperCase());
 				exit = false;
 			}catch(IllegalArgumentException e){
-				System.out.printf(e.toString());
+				System.out.printf("Insert the name\n");
 			}
 		}
-		switch(Material.valueOf(weaponMat)){
+		switch(Material.valueOf(weaponMat.toUpperCase())){
 			case WOOD:
 				tempStrModifier = tempStrModifier + 1;
 				tempWisModifier = tempWisModifier + 1;
@@ -435,16 +426,158 @@ public class Utils {
 				tempWisModifier = tempWisModifier + 2;
 				break;
 			}
-
-
-
-		System.out.printf("\nChoose the name of your weapon\n");
+		System.out.printf("Choose the name of your weapon\n");
 		String name = sc.nextLine();
-		System.out.printf("\nType the description of your armor (Do not press enter to go next line)\n");
+		System.out.printf("Type the description of your armor (Do not press enter to go next line)\n");
 		String description = sc.nextLine();
 
+		return new Weapon(name, tempStrModifier, tempSpeedModifier, tempDexModifier, tempWisModifier, Material.valueOf(weaponMat.toUpperCase()), description, WeaponType.valueOf(type.toUpperCase()));
+	}
 
-		return new Weapon(name, tempStrModifier, tempSpeedModifier, tempDexModifier, tempWisModifier, Material.valueOf(weaponMat), description, WeaponType.valueOf(type.toUpperCase()));
+	public static void printGoblin(){
+		System.out.printf("""
+					         ,      ,
+				            /(.-""-.)\\
+				        |\\  \\/      \\/  /|
+				        | \\ / =.  .= \\ / |
+				        \\( \\   o\\/o   / )/
+				         \\_, '-/  \\-' ,_/
+				           /   \\__/   \\
+				           \\ \\__/\\__/ /
+				         ___\\ \\|--|/ /___
+				       /`    \\      /    `\\
+				      /       '----'       \\
+				""");
+	}
 
+	public static void printDragon(){
+		System.out.printf("""
+				                                                                                ____________
+				                                                          (`-..________....---''  ____..._.-`
+				                                                           \\\\`._______.._,.---'''     ,'
+				                                                           ; )`.      __..-'`-.      /
+				                                                          / /     _.-' _,.;;._ `-._,'
+				                                                         / /   ,-' _.-'  //   ``--._``._
+				                                                       ,','_.-' ,-' _.- (( =-    -. `-._`-._____
+				                                                     ,;.''__..-'   _..--.\\\\.--'````--.._``-.`-._`.
+				                                      _          |\\,' .-''        ```-'`---'`-...__,._  ``-.`-.`-.`.
+				                           _     _.-,'(__)\\__)\\-'' `     ___  .          `     \\      `--._
+				                         ,',)---' /|)          `     `      ``-.   `     /     /     `     `-.
+				                         \\_____--.  '`  `               __..-.  \\     . (   < _...-----..._   `.
+				                          \\_,--..__. \\\\ .-`.\\----'';``,..-.__ \\  \\      ,`_. `.,-'`--'`---''`.  )
+				                                    `.\\`.\\  `_.-..' ,'   _,-..'  /..,-''(, ,' ; ( _______`___..'__
+				                                            ((,(,__(    ((,(,__,'  ``'-- `'`.(\\  `.,..______
+				                                                                               ``--------..._``--.__
+				""");
+	}
+
+	public static void printDwarf(){
+		System.out.printf("""
+				⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⣼⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣧⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⢸⣿⣿⣷⡀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⢀⣾⣿⣿⡇⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠈⢿⣿⣿⣿⣷⠀⣠⣾⣿⣿⣷⣄⠀⣾⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⠁⣼⣿⣿⣿⣿⣿⣿⣧⠈⠿⠛⠁⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠘⠛⠛⠛⠛⠛⠛⠛⠛⠃⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⠀⠀⣼⠏⠀⠿⣿⣶⣶⣶⣶⣿⠿⠀⠹⣷⠀⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⠀⢰⡟⠀⣴⡄⠀⣈⣹⣏⣁⡀⢠⣦⠀⢻⣇⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⠀⠈⠀⠐⢿⣿⠿⠿⠿⠿⠿⠿⣿⡿⠂⠀⠙⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⢀⣴⣿⣷⣄⠉⢠⣶⠒⠒⣶⡄⠉⣠⣾⣿⣦⡀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⠚⠛⠛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⠛⠓⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣿⣿⡿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+				""");
+	}
+
+	public static void printForest(){
+		System.out.printf("""
+				          ///\\///\\\\\\     ///////\\\\\\               ///////\\\\\\
+				          ///\\///\\\\\\     ///////\\\\\\/\\             ///////\\\\\\
+				          //\\////\\\\\\\\       ////\\\\//\\\\           ////////\\\\\\
+				          //\\\\///\\\\\\\\\\     /////\\///\\\\\\                 ||
+				         ///\\\\\\//\\\\\\\\\\\\    /////\\///\\\\\\
+				     /\\  ///\\\\\\ ||         /////\\///\\\\\\
+				    //\\\\////\\\\/\\               ||///\\\\\\                 /\\
+				   ///\\\\\\///\\//\\\\               ////\\\\\\\\               //\\\\
+				   ///\\\\\\///\\//\\\\/\\         /\\  ////\\\\\\\\         /\\    //\\\\
+				  ////\\\\\\\\/////\\//\\\\       //\\\\ ////\\\\\\\\        //\\\\   //\\\\
+				  ////\\\\\\\\////////\\\\\\     /\\/\\\\  /\\||          ///\\\\\\  //\\\\
+				 /////\\\\\\\\\\///////\\\\\\\\   //\\\\\\\\ //\\\\           ///\\\\\\ ///\\\\\\
+				 /////\\\\\\\\\\///////\\\\\\\\   //\\\\\\\\ //\\\\          ////\\\\\\\\///\\\\\\
+				 /////\\\\\\\\////////\\\\\\\\  ///\\\\\\\\ //\\\\        /\\////\\\\\\\\///\\\\\\
+				     ||  /////////\\\\\\\\ ////\\\\\\\\\\//\\\\       //\\\\///\\\\\\\\\\//\\\\\\
+				              ////\\\\\\\\/////\\\\\\\\///\\\\\\      //\\\\///\\\\\\\\\\\\||
+				             /////\\\\\\//////\\\\\\\\///\\\\\\     ///\\\\\\//\\\\\\\\\\\\
+				                 || ///////\\\\\\////\\\\\\\\   ////\\//\\||
+				                    ///////\\\\/////\\\\\\\\\\ ////////\\\\
+				                          ||     ||    /////////\\\\\\
+				                                       /////////\\\\\\
+				                                      //////////\\\\\\\\
+				                                          //////\\\\\\\\
+				                            /\\           ///////\\\\\\\\\\
+				                           //\\\\          ///////\\\\\\\\\\\\
+				   /\\                     ///\\\\\\        ////////\\\\\\\\\\\\\\
+				  //\\\\                   ////\\\\\\\\             |||
+				 ///\\\\\\                 /////\\\\\\\\\\
+				 ///\\\\\\\\             /\\//////\\\\\\\\\\\\    /\\
+				 ///\\\\\\\\\\           //\\\\/////\\\\\\\\\\\\\\  //\\\\
+				 ///\\\\\\\\\\\\         ///\\\\\\////\\\\\\\\\\\\\\ /\\/\\\\
+				 ///\\\\\\\\\\\\        ////\\\\\\\\///\\\\\\\\\\\\\\//\\\\\\\\
+				 ///\\\\\\\\\\\\\\      /////\\\\\\\\\\ ||     ///\\\\\\\\
+				 ///\\\\\\\\\\\\\\     //////\\\\\\\\\\\\      ////\\\\\\\\
+				   ||   /\\ /\\   //////\\\\\\\\\\\\      ////\\\\\\\\
+				       //\\//\\\\  //////\\\\\\\\\\\\     /////\\\\\\\\\\         /\\
+				      ///\\//\\\\ ///////\\\\\\\\\\\\\\   //////\\\\\\\\\\\\       //\\\\
+				     ///////\\\\\\      ||         //////\\\\\\\\\\\\       //\\\\
+				     ///////\\\\\\\\               ///////\\\\\\\\\\\\\\     ///\\\\\\
+				    /////\\//\\\\\\\\                     ||    /\\    ////\\\\\\\\
+				    /////\\\\/\\\\\\\\                          //\\\\   ////\\\\\\\\
+				    //////\\/\\\\\\\\                          //\\\\  /////\\\\\\\\\\
+				    //////\\\\\\\\\\\\                          //\\\\  /////\\\\\\\\\\
+				       ///\\\\|                            ///\\\\\\//////\\\\/\\\\\\
+				      ////\\\\\\                           ////\\\\\\\\    ||//\\\\
+				      ////\\\\\\\\                          ////\\\\\\\\     ///\\\\\\
+				     /////\\\\\\\\                         /////\\\\\\\\\\   ////\\\\\\\\
+				     /////\\\\\\\\                        //////\\\\\\\\\\\\  ////\\\\\\\\
+				     /////\\\\\\\\\\                     /\\     ||       ////\\\\\\\\
+				    //////\\\\\\\\\\\\                   //\\\\             ////\\\\\\\\
+				         ||                        //\\\\             ////\\\\\\\\
+				                                  ///\\\\\\           /////\\\\\\\\
+				                                 ////\\\\\\\\              ||
+				                                /////\\\\\\\\\\
+				                               //////\\\\\\\\\\\\
+				                              ///////\\\\\\\\\\\\\\
+				                             ////////\\\\\\\\\\\\\\\\
+				                                    ||
+				""");
+	}
+
+	public static void printCave(){
+		System.out.printf("""
+				 ********************************************************************************
+				*                    /   \\              /'\\       _                              *
+				*\\_..           /'.,/     \\_         .,'   \\     / \\_                            *
+				*    \\         /            \\      _/       \\_  /    \\     _                     *
+				*     \\__,.   /              \\    /           \\/.,   _|  _/ \\                    *
+				*          \\_/                \\  /',.,''\\      \\_ \\_/  \\/    \\                   *
+				*                           _  \\/   /    ',../',.\\    _/      \\                  *
+				*             /           _/m\\  \\  /    |         \\  /.,/'\\   _\\                 *
+				*           _/           /MMmm\\  \\_     |          \\/      \\_/  \\                *
+				*          /      \\     |MMMMmm|   \\__   \\          \\_       \\   \\_              *
+				*                  \\   /MMMMMMm|      \\   \\           \\       \\    \\             *
+				*                   \\  |MMMMMMmm\\      \\___            \\_      \\_   \\            *
+				*                    \\|MMMMMMMMmm|____.'  /\\_            \\       \\   \\_          *
+				*                    /'.,___________...,,'   \\            \\   \\        \\         *
+				*                   /       \\          |      \\    |__     \\   \\_       \\        *
+				*                 _/        |           \\      \\_     \\     \\    \\       \\_      *
+				*                /                               \\     \\     \\_   \\        \\     *
+				*                                                 \\     \\      \\   \\__      \\    *
+				*                                                  \\     \\_     \\     \\      \\   *
+				*                                                   |      \\     \\     \\      \\  *
+				*                                                    \\ms          |            \\ *
+				 ********************************************************************************
+				""");
 	}
 }
